@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Set">
+      <UniqueIdentifier>{33ccb33d-f067-4a61-ae9d-521b0e476e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Textures">
+      <UniqueIdentifier>{8ab7120e-a219-4967-af09-59af43790a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{9b306f1f-3cd4-4527-be91-1a9a2234e259}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -32,5 +41,22 @@
     <ClCompile Include="AngelIsland.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Binaries\Angel.sa2blvl">
+      <Filter>Source Files\Models</Filter>
+    </None>
+    <None Include="Binaries\al_stagetitle_gdark_e_tex.pak">
+      <Filter>Source Files\Textures</Filter>
+    </None>
+    <None Include="Binaries\AngelTex.pak">
+      <Filter>Source Files\Textures</Filter>
+    </None>
+    <None Include="Binaries\set_chao_dark_s.bin">
+      <Filter>Source Files\Set</Filter>
+    </None>
+    <None Include="Binaries\set_chao_dark_u.bin">
+      <Filter>Source Files\Set</Filter>
+    </None>
   </ItemGroup>
 </Project>

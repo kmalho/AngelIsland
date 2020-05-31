@@ -119,6 +119,13 @@
       <EnableUAC>false</EnableUAC>
       <AdditionalDependencies>$(ProjectDir)..\bin\ModLoaderCommon.lib;$(ProjectDir)..\bin\libmodutils.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)Binaries\Angel.sa2blvl "$(SolutionDir)bin\Levels\Chao World\Garden\Dark\" /y
+xcopy $(ProjectDir)Binaries\al_stagetitle_gdark_e_tex.pak $(SolutionDir)bin\resource\gd_PC\PRS\ /y
+xcopy $(ProjectDir)Binaries\AngelTex.pak $(SolutionDir)bin\resource\gd_PC\PRS\ /y
+xcopy $(ProjectDir)Binaries\set_chao_dark_s.bin $(SolutionDir)bin\resource\gd_PC\ /y
+xcopy $(ProjectDir)Binaries\set_chao_dark_u.bin $(SolutionDir)bin\resource\gd_PC\ /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -169,6 +176,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Binaries\al_stagetitle_gdark_e_tex.pak" />
+    <None Include="Binaries\Angel.sa2blvl" />
+    <None Include="Binaries\AngelTex.pak" />
+    <None Include="Binaries\set_chao_dark_s.bin" />
+    <None Include="Binaries\set_chao_dark_u.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
