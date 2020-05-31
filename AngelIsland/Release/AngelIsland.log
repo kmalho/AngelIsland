@@ -1,0 +1,11 @@
+﻿  pch.cpp
+  LandTableInfo.cpp
+  ModelInfo.cpp
+  AngelIsland.cpp
+  dllmain.cpp
+     Creating library C:\Users\Dama\source\repos\AngelIsland\Release\AngelIsland.lib and object C:\Users\Dama\source\repos\AngelIsland\Release\AngelIsland.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 1025 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  AngelIsland.vcxproj -> C:\Users\Dama\source\repos\AngelIsland\Release\AngelIsland.dll
