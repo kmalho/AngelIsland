@@ -1,43 +1,39 @@
 #include "pch.h"
-#include "stdafx.h"
-#include "LandTableInfo.h"
-#include "SA2ModLoader.h"
-#include "ModelInfo.h"
+#include <LandTableInfo.h>
+#include <SA2ModLoader.h>
+#include <ModelInfo.h>
+
+static const void* const Transporter_LoadPtr = (void*)0x0057E4F0;
+EntityData1* Transporter_Load(NJS_VECTOR* a1, int a2)
+{
+    EntityData1* result;
+    __asm
+    {
+        push[a2]
+        mov ebx, [a1]
+        call Transporter_LoadPtr
+        mov result, eax
+    }
+    return result;
+}
+
+void TransporterLoadingDark()
+{
+    NJS_VECTOR position;
+    position.x = 488.816f;
+    position.y = 54.061f;
+    position.z = -291.467f;
+    Transporter_Load(&position, 40959);
+}
+
+NJS_VECTOR darkGBASpawn = { 488.816f , 56.061f, -291.467f };
+
+NJS_TEXNAME AngelIslandtex[75];
+NJS_TEXLIST IslandTexList = { arrayptrandlength(AngelIslandtex) };
 
 extern "C"
 
 {
-
-
-
-    static const void* const Transporter_LoadPtr = (void*)0x0057E4F0;
-    EntityData1* Transporter_Load(NJS_VECTOR* a1, int a2)
-    {
-        EntityData1* result;
-        __asm
-        {
-            push[a2]
-            mov ebx, [a1]
-            call Transporter_LoadPtr
-            mov result, eax
-        }
-        return result;
-    }
-
-    void TransporterLoadingDark()
-    {
-        NJS_VECTOR position;
-        position.x = 488.816f;
-        position.y = 54.061f;
-        position.z = -291.467f;
-        Transporter_Load(&position, 40959);
-    }
-
-    NJS_VECTOR darkGBASpawn = { 488.816f , 56.061f, -291.467f };
-
-    NJS_TEXNAME AngelIslandtex[75];
-    NJS_TEXLIST IslandTexList = { arrayptrandlength(AngelIslandtex) };
-
     __declspec(dllexport) void Init(const char* path, const HelperFunctions& helperFunctions)
     {
 
