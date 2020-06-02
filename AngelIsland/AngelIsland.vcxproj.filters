@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Models">
       <UniqueIdentifier>{9b306f1f-3cd4-4527-be91-1a9a2234e259}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\INI">
+      <UniqueIdentifier>{59fd78ba-53bd-4a40-bcc3-566efe81c984}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -57,6 +60,9 @@
     </None>
     <None Include="Binaries\set_chao_dark_u.bin">
       <Filter>Source Files\Set</Filter>
+    </None>
+    <None Include="Binaries\mod.ini">
+      <Filter>Source Files\INI</Filter>
     </None>
   </ItemGroup>
 </Project>

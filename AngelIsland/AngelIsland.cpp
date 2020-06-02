@@ -1,7 +1,9 @@
 #include "pch.h"
+#include "stdafx.h"
 #include <LandTableInfo.h>
 #include <SA2ModLoader.h>
 #include <ModelInfo.h>
+
 
 //Structs
 struct CCL_INFO
@@ -20,7 +22,6 @@ struct CCL_INFO
 	int angy;
 	int angz;
 };
-
 
 //Game Declarations
 FunctionPointer(void, objectFenceL, (ObjectMaster *a1), 0x5A61E0);	//Fence (Long)
@@ -110,6 +111,7 @@ NJS_VECTOR darkGBASpawn = { 488.816f , 56.061f, -291.467f };
 NJS_TEXNAME AngelIslandtex[75];
 NJS_TEXLIST IslandTexList = { arrayptrandlength(AngelIslandtex) };
 
+
 extern "C"
 {
 	__declspec(dllexport) void Init(const char* path, const HelperFunctions& helperFunctions)
@@ -122,7 +124,7 @@ extern "C"
 		*AngelTable = *(new LandTableInfo(std::string(path) + "\\Levels\\Chao World\\Garden\\Dark\\Angel.sa2blvl"))->getlandtable();
 		AngelTable->TextureList = &IslandTexList;
 		AngelTable->TextureName = (char*)"AngelTex";
-		
+
 		AL_DarkGardenMaster_ObjectList = AL_AngelIslandObjTable;
 		
 
@@ -158,10 +160,9 @@ extern "C"
 		WriteData((float**)0x0052B978, &darkGBASpawn.y);
 		WriteData((float**)0x0052B981, &darkGBASpawn.z);
 
-		NJS_OBJECT* OBJ = (NJS_OBJECT*)0x11C0834;
-		*OBJ = *(new ModelInfo(std::string(path) + "\\Location\\OBJModel.sa2mdl"))->getmodel();
+		//NJS_OBJECT* OBJ = (NJS_OBJECT*)0x11C0834;
+		//*OBJ = *(new ModelInfo(std::string(path) + "\\Location\\OBJModel.sa2mdl"))->getmodel();
 	}
-
 
 	__declspec(dllexport) ModInfo SA2ModInfo = { ModLoaderVer };
 }
