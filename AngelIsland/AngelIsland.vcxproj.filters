@@ -64,5 +64,8 @@
     <None Include="Binaries\mod.ini">
       <Filter>Source Files\INI</Filter>
     </None>
+    <None Include="Binaries\mastEmerald.sa2mdl">
+      <Filter>Source Files\Models</Filter>
+    </None>
   </ItemGroup>
 </Project>

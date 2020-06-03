@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <LandTableInfo.h>
 #include <SA2ModLoader.h>
 #include <ModelInfo.h>
@@ -36,6 +36,32 @@ FunctionPointer(void, objectLobby, (ObjectMaster* a1), 0x55AB90);	//Garden > Lob
 FunctionPointer(void, objectChaoColliClimb, (ObjectMaster* a1), 0x55AB20);	//Climable Colli for Chao
 FunctionPointer(void, objectChaoColliCube, (ObjectMaster* a1), 0x55AAB0);	//Cube Colli for Chao
 
+//Empty Declarations
+NJS_OBJECT *cnkobj_MasterEmerald;
+
+//Collision Data
+CCL_INFO ccl_masteremerald[] = {
+	{ 0, 0, 0x77, 0, 0x2000, 0.0, 8.0, 0.0, 25.0, 8.0, 0.0, 0.0, 0, 0, 0 }
+};
+
+//The below function is for testing.
+//void __cdecl simple_display(ObjectMaster* obj) {
+//
+//	EntityData1 *ent;
+//
+//	ent = obj->Data1.Entity;
+//
+//	njPushMatrix(0);
+//	njTranslate(0, ent->Position.x, ent->Position.y, ent->Position.z);
+//	ProcessChunkModel(cnkobj_MasterEmerald->chunkmodel); //Root Master Emerald Model Pointer
+//	njPopMatrix(1u);
+//}
+//
+//void __cdecl simple_eme(ObjectMaster* obj) {
+//	obj->MainSub = simple_display;
+//	obj->DisplaySub = simple_display;
+//}
+
 //Replacement Object List
 ObjectListEntry AL_AngelIsandObjEntry[] = {
 	{ LoadObj_Data1, 2, 0, 0.0f, objectFenceL, (char*)"Fence L" },
@@ -57,63 +83,54 @@ ObjectListEntry AL_AngelIsandObjEntry[] = {
 
 ObjectListHead AL_AngelIslandObjTable = { arraylengthandptrT(AL_AngelIsandObjEntry, int) };
 
-//Empty Declarations
-NJS_CNK_MODEL cnkmdl_MasterEmerald;
-NJS_OBJECT cnkobj_MasterEmerald;
-
-//Collision Data
-CCL_INFO ccl_masteremerald[] = {
-	{ 0, 0, 0x77, 0, 0x2000, 0.0, 8.0, 0.0, 25.0, 8.0, 0.0, 0.0, 0, 0, 0 }
-};
-
-//The below function is for testing.
-void __cdecl simple_display(ObjectMaster* obj) {
-
-	EntityData1 *ent;
-
-	ent = obj->Data1.Entity;
-
-	njPushMatrix(0);
-	njTranslate(0, ent->Position.x, ent->Position.y, ent->Position.z);
-	//ProcessChunkModel(&cnkmdl_MasterEmerald); //Root Master Emerald Model Pointer
-	njPopMatrix(1u);
-}
-
-void __cdecl simple_eme(ObjectMaster* obj) {
-	obj->DisplaySub = simple_display;
-}
-
-static const void* const Transporter_LoadPtr = (void*)0x0057E4F0;
-EntityData1* Transporter_Load(NJS_VECTOR* a1, int a2)
+void forceCharYPos()
 {
-	EntityData1* result;
-	__asm
+	float* yPosChar; // ecx
+
+	if (CurrentChaoArea > 0 && CurrentChaoArea <= 3)
 	{
-		push[a2]
-		mov ebx, [a1]
-		call Transporter_LoadPtr
-		mov result, eax
+		yPosChar = &MainCharObj1[0]->Position.y;
+		if (*&MainCharObj1[0]->Position.y > 200.0f)
+		{
+			*yPosChar = 200.0f;
+		}
+		if (-10.0f > * yPosChar)
+		{
+			*yPosChar = 0.5;
+		}
 	}
-	return result;
 }
-
-void TransporterLoadingDark()
-{
-	NJS_VECTOR position;
-	position.x = 488.816f;
-	position.y = 54.061f;
-	position.z = -291.467f;
-	Transporter_Load(&position, 40959);
-}
-
-NJS_VECTOR darkGBASpawn = { 488.816f , 56.061f, -291.467f };
-
-NJS_TEXNAME AngelIslandtex[75];
-NJS_TEXLIST IslandTexList = { arrayptrandlength(AngelIslandtex) };
-
 
 extern "C"
 {
+	static const void* const Transporter_LoadPtr = (void*)0x0057E4F0;
+	EntityData1* Transporter_Load(NJS_VECTOR* a1, int a2)
+	{
+		EntityData1* result;
+		__asm
+		{
+			push[a2]
+			mov ebx, [a1]
+			call Transporter_LoadPtr
+			mov result, eax
+		}
+		return result;
+	}
+
+	void TransporterLoadingDark()
+	{
+		NJS_VECTOR position;
+		position.x = 488.816f;
+		position.y = 54.061f;
+		position.z = -291.467f;
+		Transporter_Load(&position, 40959);
+	}
+
+	NJS_VECTOR darkGBASpawn = { 488.816f , 56.061f, -291.467f };
+
+	NJS_TEXNAME AngelIslandtex[75];
+	NJS_TEXLIST IslandTexList = { arrayptrandlength(AngelIslandtex) };
+
 	__declspec(dllexport) void Init(const char* path, const HelperFunctions& helperFunctions)
 	{
 
@@ -121,11 +138,15 @@ extern "C"
 
 
 		LandTable* AngelTable = (LandTable*)GetProcAddress(hmodule, "objLandTableDark");
-		*AngelTable = *(new LandTableInfo(std::string(path) + "\\Levels\\Chao World\\Garden\\Dark\\Angel.sa2blvl"))->getlandtable();
+		*AngelTable = *(new LandTableInfo(std::string(path) + "\\Models\\Angel.sa2blvl"))->getlandtable();
 		AngelTable->TextureList = &IslandTexList;
 		AngelTable->TextureName = (char*)"AngelTex";
 
-		AL_DarkGardenMaster_ObjectList = AL_AngelIslandObjTable;
+		//*cnkobj_MasterEmerald = *(new ModelInfo(std::string(path) + "\\Models\\mastEmerald.sa2mdl"))->getmodel();
+
+		//AL_DarkGardenMaster_ObjectList = AL_AngelIslandObjTable;
+
+		WriteJump((void*)0x0052B200, nullsub_1);	//Removes Height Limitation
 		
 
 		DataArray(NJS_VECTOR, ChaoSpawn, 0x01366260, 16 * 3);
