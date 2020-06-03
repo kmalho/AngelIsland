@@ -147,7 +147,7 @@ extern "C"
 		AngelTable->TextureList = &IslandTexList;
 		AngelTable->TextureName = (char*)"AngelTex";
 
-		NJS_OBJECT cnkobj_MasterEmerald = *(new ModelInfo(std::string(path) + "\\Models\\mastEmerald.sa2mdl"))->getmodel();
+		//NJS_OBJECT cnkobj_MasterEmerald = *(new ModelInfo(std::string(path) + "\\Models\\mastEmerald.sa2mdl"))->getmodel();
 
 		AL_DarkGardenMaster_ObjectList = AL_AngelIslandObjTable;	//Replace existing Object List
 
