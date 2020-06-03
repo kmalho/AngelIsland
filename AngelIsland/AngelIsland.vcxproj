@@ -24,6 +24,7 @@
     <ProjectGuid>{77f83c77-e227-498f-b61d-7e58e6afd668}</ProjectGuid>
     <RootNamespace>AngelIsland</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>AngelIsland</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
